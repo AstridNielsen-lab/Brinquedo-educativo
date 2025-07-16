@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RotateCw, RefreshCw, Play, Pause, Plus, Trash2 } from 'lucide-react';
+import SplashScreen from './SplashScreen';
 
 interface Block {
   id: string;
@@ -28,6 +29,7 @@ const blockTypes = [
 ];
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [blocks, setBlocks] = useState<Block[]>([
     { id: '1', type: 'cube', color: colors[0].value, x: 200, y: 200, rotation: 0, connected: true },
     { id: '2', type: 'cube', color: colors[1].value, x: 200, y: 150, rotation: 0, connected: true },
@@ -267,8 +269,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
-      <div className="max-w-6xl mx-auto">
+    <>
+      {showSplash && <SplashScreen onFinished={() => setShowSplash(false)} />}
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
+        <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
             Blocos Magnéticos Infantis
